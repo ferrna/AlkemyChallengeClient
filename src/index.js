@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import axios from "axios";
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND;
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 ReactDOM.render(
   <React.StrictMode>
