@@ -22,8 +22,7 @@ function Login() {
   const handleRegister = async () => {
       const headers = {
         "Accept": "application/json",
-        "Content-type": "application/json",
-        "Access-Control-Allow-Origin": `${api_url}`
+        "Content-type": "application/json"
       }
       const options = {
         headers,
@@ -58,8 +57,7 @@ function Login() {
   const handleLogIn = async () => {
     const headers = {
       "Accept": "application/json",
-      "Content-type": "application/json",
-      "Access-Control-Allow-Origin": "*"
+      "Content-type": "application/json"
     }
     const options = {
       headers,
