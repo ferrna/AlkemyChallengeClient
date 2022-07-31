@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
-import axios from 'axios';
+//import axios from 'axios';
 import swal from 'sweetalert';
 
-const api_url = process.env.REACT_APP_BACKEND;
+//const api_url = process.env.REACT_APP_BACKEND;
 
 function Login() {
   const [userdata, setUserdata] = useState({ email: '', password: '' });
@@ -14,22 +14,27 @@ function Login() {
     setUserdata({ ...userdata, [e.target.name]: e.target.value });
   };
 
-  const headers = {};
+  /* const headers = {};
   headers['Access-Control-Allow-Origin'] = '*'
   headers['Accept'] = 'application/json'
-  headers['Content-type'] = 'application/json'
+  headers['Content-type'] = 'application/json' */
 
   const handleRegister = async () => {
-    await axios({
-      method: 'post',
-      headers: headers,
-      data: {
+      const headers = {
+        "Accept": "application/json",
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      }
+      const options = {
+        headers,
+        method: "POST",
+      }
+      const data = {
         email: userdata.email,
         password: userdata.password,
-      },
-      withCredentials: true,
-      url: `https://mywallet-alkemy-api.herokuapp.com/user/register`,
-    })
+      }
+      options.body = JSON.stringify({ ...data });
+      fetch('https://mywallet-alkemy-api.herokuapp.com/user/register', options)
       .then((res) => {
         if (res.statusText === 'OK') {
           swal({
@@ -49,32 +54,23 @@ function Login() {
         console.log(err.message);
       });
   };
-  /* const handleRegister2 = async () => {
-    await axios({
-      method: 'get',
-      withCredentials: true,
-      url: 'http://localhost:3001/user/user',
-    }).then((res) => {
-      if (res.statusText === 'OK') {
-        console.log(res);
-      }
-    });
-  }; */
+
   const handleLogIn = async () => {
-    await axios({
-      method: 'post',
-      data: {
-        email: userdata.email,
-        password: userdata.password,
-      },
-      headers: {
-        'Accept': 'application/json',
-        'Content-type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      withCredentials: true,
-      url: `https://mywallet-alkemy-api.herokuapp.com/user/login`,
-    })
+    const headers = {
+      "Accept": "application/json",
+      "Content-type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    }
+    const options = {
+      headers,
+      method: "POST",
+    }
+    const data = {
+      email: userdata.email,
+      password: userdata.password,
+    }
+    options.body = JSON.stringify({ ...data });
+    fetch('https://mywallet-alkemy-api.herokuapp.com/user/login', options)
       .then((res) => {
         if (res.statusText === 'OK') {
           navigate('/');
@@ -117,10 +113,6 @@ function Login() {
         <button id='signin-button' onClick={handleRegister}>
           Create an account
         </button>
-        {/* 
-        <button id='signin-button' onClick={handleRegister2}>
-          Get user
-        </button> */}
       </div>
     </section>
   );
@@ -128,74 +120,62 @@ function Login() {
 
 export default Login;
 
-/* import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import './styles.css';
-import axios from 'axios';
+/* const handleRegister = async () => {
+  await axios({
+    method: 'post',
+    headers: headers,
+    data: {
+      email: userdata.email,
+      password: userdata.password,
+    },
+    withCredentials: true,
+    url: `https://mywallet-alkemy-api.herokuapp.com/user/register`,
+  })
+    .then((res) => {
+      if (res.statusText === 'OK') {
+        swal({
+          title: `Registro con éxito`,
+          text: `ID: ${res.id}`,
+          icon: 'success',
+          button: 'Aceptar',
+        });
+        window.location.reload();
+      }
+    })
+    .catch((err) => {
+      swal({
+        title: `Ya existe un usuario con ese username.`,
+        icon: 'error',
+      });
+      console.log(err.message);
+    });
+}; */
 
-const Login = () => {
-  const [formularioEnviado, cambiarFormularioEnviado] = useState(false);
-  return (
-    <>
-      <Formik
-        initialValues={{
-          nombre: '',
-          correo: '',
-        }}
-        validate={(valores) => {
-          let errores = {};
 
-          // Validacion nombre
-          if (!valores.nombre) {
-            errores.nombre = 'Por favor ingresa un nombre';
-          } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombre)) {
-            errores.nombre = 'El nombre solo puede contener letras y espacios';
-          }
-
-          // Validacion correo
-          if (!valores.correo) {
-            errores.correo = 'Por favor ingresa un correo electronico';
-          } else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.correo)) {
-            errores.correo =
-              'El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.';
-          }
-
-          return errores;
-        }}
-        onSubmit={async (valores, { resetForm }) => {
-          await axios({method: 'post', data:  });
-          resetForm();
-          console.log('Formulario enviado');
-          cambiarFormularioEnviado(true);
-          setTimeout(() => cambiarFormularioEnviado(false), 5000);
-        }}
-      >
-        {({ errors }) => (
-          <Form className='formulario'>
-            <div>
-              <label htmlFor='nombre'>Nombre</label>
-              <Field type='text' id='nombre' name='nombre' placeholder='John Doe' />
-              <ErrorMessage
-                name='nombre'
-                component={() => <div className='error'>{errors.nombre}</div>}
-              />
-            </div>
-            <div>
-              <label htmlFor='correo'>Correo</label>
-              <Field type='text' id='correo' name='correo' placeholder='correo@correo.com' />
-              <ErrorMessage
-                name='correo'
-                component={() => <div className='error'>{errors.correo}</div>}
-              />
-            </div>
-
-            <button type='submit'>Enviar</button>
-            {formularioEnviado && <p className='exito'>Formulario enviado con exito!</p>}
-          </Form>
-        )}
-      </Formik>
-    </>
-  );
-};
-
-export default Login; */
+/* const handleLogIn = async () => {
+  await axios({
+    method: 'post',
+    data: {
+      email: userdata.email,
+      password: userdata.password,
+    },
+    headers: {
+      'Accept': 'application/json',
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    },
+    withCredentials: true,
+    url: `https://mywallet-alkemy-api.herokuapp.com/user/login`,
+  })
+    .then((res) => {
+      if (res.statusText === 'OK') {
+        navigate('/');
+      }
+    })
+    .catch(() =>
+      swal({
+        title: `Usuario o contraseña incorretas`,
+        icon: 'error',
+      })
+    );
+}; */
