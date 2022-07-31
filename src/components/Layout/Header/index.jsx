@@ -19,7 +19,7 @@ function Header() {
     axios({
       method: "get",
       withCredentials: true,
-      url: `${api_url}user/logout`,
+      url: `${api_url}/user/logout`,
     })
       .then((res) => navigate("/login"))
       .catch((err) => console.log(err));
