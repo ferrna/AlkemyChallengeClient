@@ -29,11 +29,15 @@ function Operations() {
         url: `${api_url}/user/protected-route`,
       })
         .then(() => {
-          dispatch(fetchAllTransactions());
-          setIsLoading(false);
-          dispatch(getUserBalance());
+          if (mounted) {
+            dispatch(fetchAllTransactions());
+            setIsLoading(false);
+            dispatch(getUserBalance());
+          }
         })
-        .catch(() => navigate("/login"));
+        .catch(() => {
+          if (mounted) navigate("/login");
+        });
     }
     return () => (mounted = false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
