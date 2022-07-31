@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
-//import axios from 'axios';
+import axios from 'axios';
 import swal from 'sweetalert';
 
 const api_url = process.env.REACT_APP_BACKEND;
@@ -55,21 +55,11 @@ function Login() {
   };
 
   const handleLogIn = async () => {
-    const headers = {
-      "Accept": "application/json",
-      "Content-type": "application/json",
-      "Access-Control-Allow-Origin": `${api_url}`
-    }
-    const options = {
-      headers,
-      method: "POST",
-    }
     const data = {
       email: userdata.email,
       password: userdata.password,
     }
-    options.body = JSON.stringify({ ...data });
-    fetch('https://mywallet-alkemy-api.herokuapp.com/user/login', options)
+    axios.post('/user/login', data)
       .then((res) => {
         if (res.statusText === 'OK') {
           navigate('/');
@@ -118,6 +108,37 @@ function Login() {
 }
 
 export default Login;
+
+/* const handleLogIn = async () => {
+  const headers = {
+    "Accept": "application/json",
+    "Content-type": "application/json",
+    "Access-Control-Allow-Origin": `${api_url}`
+  }
+  const options = {
+    headers,
+    method: "POST",
+  }
+  const data = {
+    email: userdata.email,
+    password: userdata.password,
+  }
+  options.body = JSON.stringify({ ...data });
+  fetch('https://mywallet-alkemy-api.herokuapp.com/user/login', options)
+    .then((res) => {
+      if (res.statusText === 'OK') {
+        navigate('/');
+      }
+    })
+    .catch(() =>
+      swal({
+        title: `Usuario o contraseña incorretas`,
+        icon: 'error',
+      })
+    );
+}; */
+
+
 
 /* const handleRegister = async () => {
   await axios({
