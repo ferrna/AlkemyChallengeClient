@@ -14,14 +14,15 @@ function Login() {
     setUserdata({ ...userdata, [e.target.name]: e.target.value });
   };
 
+  const headers = {};
+  headers['Access-Control-Allow-Origin'] = '*'
+  headers['Accept'] = 'application/json'
+  headers['Content-type'] = 'application/json'
+
   const handleRegister = async () => {
     await axios({
       method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
+      headers: headers,
       data: {
         email: userdata.email,
         password: userdata.password,
