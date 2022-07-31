@@ -22,7 +22,7 @@ function Login() {
         password: userdata.password,
       },
       withCredentials: true,
-      url: `${api_url}/user/register`,
+      url: `${api_url}user/register`,
     })
       .then((res) => {
         if (res.statusText === "OK") {
@@ -62,7 +62,7 @@ function Login() {
         password: userdata.password,
       },
       withCredentials: true,
-      url: `${api_url}/user/login`,
+      url: `${api_url}user/login`,
     })
       .then((res) => {
         if (res.statusText === "OK") {

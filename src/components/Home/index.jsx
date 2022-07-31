@@ -24,7 +24,7 @@ function Home() {
       axios({
         method: "get",
         withCredentials: true,
-        url: `${api_url}/user/protected-route`,
+        url: `${api_url}user/protected-route`,
       })
         .then(() => {
           if (mounted) {
