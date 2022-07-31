@@ -4,7 +4,7 @@ import './styles.css';
 //import axios from 'axios';
 import swal from 'sweetalert';
 
-//const api_url = process.env.REACT_APP_BACKEND;
+const api_url = process.env.REACT_APP_BACKEND;
 
 function Login() {
   const [userdata, setUserdata] = useState({ email: '', password: '' });
@@ -23,7 +23,7 @@ function Login() {
       const headers = {
         "Accept": "application/json",
         "Content-type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": `${api_url}`
       }
       const options = {
         headers,
