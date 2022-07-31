@@ -4,6 +4,8 @@ import { MdOutlineExpandMore } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const api_url = process.env.REACT_APP_BACKEND;
+
 function Header() {
   const refMoreMenu = useRef();
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ function Header() {
     axios({
       method: "get",
       withCredentials: true,
-      url: "http://localhost:3001/user/logout",
+      url: `${api_url}/user/logout`,
     })
       .then((res) => navigate("/login"))
       .catch((err) => console.log(err));

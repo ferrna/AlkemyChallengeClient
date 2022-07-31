@@ -7,6 +7,8 @@ import Loader from "../common/Loader";
 import { HomeStyled } from "./HomeStyled";
 import RowTransaction from "./RowTransaction";
 
+const api_url = process.env.REACT_APP_BACKEND;
+
 function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ function Home() {
       axios({
         method: "get",
         withCredentials: true,
-        url: "http://localhost:3001/user/protected-route",
+        url: `${api_url}/user/protected-route`,
       })
         .then(() => {
           dispatch(fetchLastTransactions());

@@ -4,6 +4,8 @@ import "./styles.css";
 import axios from "axios";
 import swal from "sweetalert";
 
+const api_url = process.env.REACT_APP_BACKEND;
+
 function Login() {
   const [userdata, setUserdata] = useState({ email: "", password: "" });
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ function Login() {
         password: userdata.password,
       },
       withCredentials: true,
-      url: "http://localhost:3001/user/register",
+      url: `${api_url}/user/register`,
     })
       .then((res) => {
         if (res.statusText === "OK") {
@@ -60,7 +62,7 @@ function Login() {
         password: userdata.password,
       },
       withCredentials: true,
-      url: "http://localhost:3001/user/login",
+      url: `${api_url}/user/login`,
     })
       .then((res) => {
         if (res.statusText === "OK") {

@@ -8,6 +8,8 @@ import Form from "./Form";
 import RowTransaction from "./RowTransaction";
 import { OperationsStyled } from "./OperationsStyled";
 
+const api_url = process.env.REACT_APP_BACKEND;
+
 function Operations() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ function Operations() {
       axios({
         method: "get",
         withCredentials: true,
-        url: "http://localhost:3001/user/protected-route",
+        url: `${api_url}/user/protected-route`,
       })
         .then(() => {
           dispatch(fetchAllTransactions());
