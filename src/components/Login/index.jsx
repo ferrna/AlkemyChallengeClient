@@ -22,7 +22,7 @@ function Login() {
         password: userdata.password,
       },
       withCredentials: true,
-      url: `${api_url}user/register`,
+      url: `https://mywallet-alkemy-api.herokuapp.com/user/register`,
     })
       .then((res) => {
         if (res.statusText === "OK") {
@@ -62,7 +62,7 @@ function Login() {
         password: userdata.password,
       },
       withCredentials: true,
-      url: `${api_url}user/login`,
+      url: `https://mywallet-alkemy-api.herokuapp.com/user/login`,
     })
       .then((res) => {
         if (res.statusText === "OK") {
