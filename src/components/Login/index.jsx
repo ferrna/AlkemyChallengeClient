@@ -57,7 +57,8 @@ function Login() {
   const handleLogIn = async () => {
     const headers = {
       "Accept": "application/json",
-      "Content-type": "application/json"
+      "Content-type": "application/json",
+      "Access-Control-Allow-Origin": `${api_url}`
     }
     const options = {
       headers,
