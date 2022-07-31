@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import axios from "axios";
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND;
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://mywallet-alkemy-api.herokuapp.com';
 
 ReactDOM.render(
   <React.StrictMode>
