@@ -66,6 +66,11 @@ function Login() {
         email: userdata.email,
         password: userdata.password,
       },
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
       withCredentials: true,
       url: `https://mywallet-alkemy-api.herokuapp.com/user/login`,
     })
