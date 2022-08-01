@@ -27,6 +27,7 @@ function Login() {
       const options = {
         headers,
         method: "POST",
+        credentials: "include",
       }
       const data = {
         email: userdata.email,
@@ -55,11 +56,27 @@ function Login() {
   };
 
   const handleLogIn = async () => {
+    const headers = {
+      "Accept": "application/json",
+      "Content-type": "application/json",
+      "Access-Control-Allow-Origin": "https://mywallet-alkemy-api.herokuapp.com"
+    }
+    const options = {
+      headers,
+      method: "POST",
+      credentials: "include",
+    }
     const data = {
       email: userdata.email,
       password: userdata.password,
     }
-    axios.post('/user/login', data)
+    options.body = JSON.stringify({ ...data });
+    fetch('https://mywallet-alkemy-api.herokuapp.com/user/login', options)
+    /* const data = {
+      email: userdata.email,
+      password: userdata.password,
+    }
+    axios.post('/user/login', data) */
       .then((res) => {
         if (res.statusText === 'OK') {
           navigate('/');
